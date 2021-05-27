@@ -23,11 +23,12 @@ This document contains the following details:
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly redundant, in addition to restricting traffic to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box? 
+- A load balancer restricts access while distributing network traffic across servers. This can help protect against DDoS attacks. 
+- A jumpbox serves as a secure node from which an adminstrator can connect to other systems.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the network and system logs.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+- Filebeat collects logs about the file system, watching for changes made to files and when they were made.
+- Metricbeat records various metrics of a system such as CPU usage and uptime. 
 
 The configuration details of each machine may be found below.
 
@@ -42,7 +43,7 @@ The configuration details of each machine may be found below.
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the ELK virtual machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+Only the Jumpbox can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - 136.55.85.135
 
 Machines within the network can only be accessed by the Jumpbox.
@@ -50,21 +51,24 @@ Machines within the network can only be accessed by the Jumpbox.
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name       | Publicly Accessible | Allowed IP Addresses |
+|------------|---------------------|----------------------|
+| Jump Box   | Yes                 | 52.136.112.37        |
+| Web 1 DVWA | No                  | 10.0.0.9             |
+| Web 2 DVWA | No                  | 10.0.0.8             |
+| ELK Server | No                  | 10.1.0.4             |
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- the playbook efficiently encompasses all configuration aspects and streamlines the process, minimizing the likelihood of human error.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Installs docker.io
+- Installs pip3
+- Installs Docker python module
+- Increases virtual memory
+- Downloads and launches docker ELK container
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
